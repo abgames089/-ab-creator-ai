@@ -1,0 +1,470 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090610">
+
+<title>AB CREATOR AI</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #090610;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+header {
+  background: #100a1b;
+  border-bottom: 1px solid #7136b7;
+  padding: 25px 15px;
+  text-align: center;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #c18aff;
+  text-shadow: 0 0 15px #873de7;
+}
+
+.subtitle {
+  color: #aaa;
+  font-size: 11px;
+  margin-top: 8px;
+  letter-spacing: 3px;
+}
+
+.container {
+  width: 100%;
+  max-width: 750px;
+  margin: auto;
+  padding: 25px 16px 45px;
+}
+
+.welcome {
+  margin-bottom: 25px;
+}
+
+.welcome h1 {
+  font-size: 25px;
+  color: #c18aff;
+  margin-bottom: 10px;
+}
+
+.welcome p {
+  color: #aaa;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.card {
+  background: #15101f;
+  border: 1px solid #43265f;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px #0005;
+}
+
+.card h2 {
+  color: #c18aff;
+  font-size: 19px;
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin: 17px 0 8px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 13px;
+  background: #090610;
+  color: white;
+  border: 1px solid #583779;
+  border-radius: 9px;
+  outline: none;
+  font-size: 14px;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #bd7aff;
+  box-shadow: 0 0 8px #8d42d5;
+}
+
+.upload {
+  display: block;
+  border: 2px dashed #9c55e7;
+  padding: 30px 15px;
+  text-align: center;
+  border-radius: 12px;
+  color: #d8baff;
+  cursor: pointer;
+  background: #100a19;
+}
+
+.upload:hover {
+  background: #211332;
+}
+
+.upload .emoji {
+  font-size: 38px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+video {
+  width: 100%;
+  max-height: 400px;
+  display: none;
+  margin-top: 15px;
+  background: #000;
+  border-radius: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 18px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(100deg, #6e22c9, #b34eff);
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+}
+
+button:hover {
+  filter: brightness(1.2);
+}
+
+button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.secondary {
+  background: #292035;
+  border: 1px solid #68428c;
+}
+
+.notice {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #999;
+  margin-top: 13px;
+}
+
+.result {
+  display: none;
+  background: #171020;
+  border: 1px solid #9554d9;
+  border-radius: 14px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.result h2 {
+  color: #c18aff;
+  margin-bottom: 15px;
+}
+
+.result p {
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+
+.history-item {
+  background: #0e0a16;
+  border: 1px solid #38264d;
+  padding: 13px;
+  border-radius: 9px;
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.empty {
+  color: #888;
+  font-size: 13px;
+}
+
+footer {
+  text-align: center;
+  color: #777;
+  padding: 25px;
+  font-size: 12px;
+  border-top: 1px solid #241632;
+}
+
+@media (min-width: 700px) {
+  .container {
+    padding-top: 40px;
+  }
+
+  .card {
+    padding: 25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">AB CREATOR AI</div>
+  <div class="subtitle">SEU TREINADOR DE EDIÇÃO</div>
+</header>
+
+<main class="container">
+
+  <section class="welcome">
+    <h1>Olá, criador! 👾</h1>
+    <p>
+      Envie sua edit, escolha o estilo e prepare
+      seu trabalho para receber uma avaliação.
+    </p>
+  </section>
+
+  <section class="card">
+
+    <h2>🎬 Envie sua edição</h2>
+
+    <label class="upload" for="videoFile">
+      <span class="emoji">📁</span>
+      Clique aqui para selecionar seu vídeo
+      <p class="notice">MP4, WebM ou MOV — máximo 100 MB</p>
+    </label>
+
+    <input
+      type="file"
+      id="videoFile"
+      accept="video/mp4,video/webm,video/quicktime"
+      hidden
+    >
+
+    <video id="preview" controls playsinline></video>
+
+    <label for="style">Estilo da edição</label>
+
+    <select id="style">
+      <option value="">Escolha uma opção</option>
+      <option>Truck Edit</option>
+      <option>Car Edit</option>
+      <option>Gaming Edit</option>
+      <option>Anime Edit</option>
+      <option>Transições</option>
+      <option>Outro</option>
+    </select>
+
+    <label for="description">Conte sobre sua edit</label>
+
+    <textarea
+      id="description"
+      rows="4"
+      placeholder="Quais efeitos você usou? Como escolheu a música?"
+    ></textarea>
+
+    <button id="prepare" disabled>
+      PREPARAR MINHA AVALIAÇÃO
+    </button>
+
+    <div class="notice">
+      Nesta versão, o vídeo é exibido localmente.
+      A avaliação automática por inteligência artificial
+      ainda será integrada.
+    </div>
+
+  </section>
+
+  <section class="result" id="result">
+    <h2>✅ Edit preparada!</h2>
+
+    <p><strong>Vídeo:</strong> <span id="fileName"></span></p>
+    <p><strong>Estilo:</strong> <span id="fileStyle"></span></p>
+    <p><strong>Descrição:</strong> <span id="fileDescription"></span></p>
+
+    <p class="notice">
+      Seu vídeo está pronto para a próxima etapa.
+      Nenhuma nota automática foi gerada nesta versão.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>📚 Histórico local</h2>
+    <div id="history">
+      <p class="empty">Nenhuma avaliação preparada ainda.</p>
+    </div>
+
+    <button class="secondary" id="clearHistory">
+      LIMPAR HISTÓRICO
+    </button>
+  </section>
+
+</main>
+
+<footer>
+  <strong>AB GAMES</strong><br>
+  AB CREATOR AI<br>
+  Criatividade em cada detalhe 👾
+</footer>
+
+<script>
+const videoInput = document.getElementById("videoFile");
+const preview = document.getElementById("preview");
+const prepare = document.getElementById("prepare");
+const result = document.getElementById("result");
+const historyArea = document.getElementById("history");
+
+let selectedFile = null;
+let videoURL = null;
+
+function loadHistory() {
+  let history = [];
+
+  try {
+    history = JSON.parse(
+      localStorage.getItem("abCreatorHistory") || "[]"
+    );
+  } catch {
+    history = [];
+  }
+
+  historyArea.innerHTML = "";
+
+  if (!history.length) {
+    historyArea.innerHTML =
+      '<p class="empty">Nenhuma avaliação preparada ainda.</p>';
+    return;
+  }
+
+  history.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "history-item";
+
+    const name = document.createElement("strong");
+    name.textContent = item.name;
+
+    const details = document.createElement("p");
+    details.textContent =
+      item.style + " • " + item.date;
+
+    div.appendChild(name);
+    div.appendChild(details);
+    historyArea.appendChild(div);
+  });
+}
+
+videoInput.addEventListener("change", function() {
+  const file = this.files[0];
+
+  if (!file) return;
+
+  if (!file.type.startsWith("video/")) {
+    alert("Selecione um vídeo válido.");
+    this.value = "";
+    return;
+  }
+
+  if (file.size > 100 * 1024 * 1024) {
+    alert("O vídeo precisa ter no máximo 100 MB.");
+    this.value = "";
+    return;
+  }
+
+  if (videoURL) {
+    URL.revokeObjectURL(videoURL);
+  }
+
+  selectedFile = file;
+  videoURL = URL.createObjectURL(file);
+
+  preview.src = videoURL;
+  preview.style.display = "block";
+
+  prepare.disabled = false;
+  result.style.display = "none";
+});
+
+prepare.addEventListener("click", function() {
+
+  if (!selectedFile) {
+    alert("Selecione um vídeo primeiro.");
+    return;
+  }
+
+  const style = document.getElementById("style").value;
+  const description =
+    document.getElementById("description").value.trim();
+
+  if (!style) {
+    alert("Escolha o estilo da sua edição.");
+    return;
+  }
+
+  document.getElementById("fileName").textContent =
+    selectedFile.name;
+
+  document.getElementById("fileStyle").textContent =
+    style;
+
+  document.getElementById("fileDescription").textContent =
+    description || "Não informada.";
+
+  result.style.display = "block";
+
+  const history = JSON.parse(
+    localStorage.getItem("abCreatorHistory") || "[]"
+  );
+
+  history.unshift({
+    name: selectedFile.name,
+    style: style,
+    date: new Date().toLocaleDateString("pt-BR")
+  });
+
+  localStorage.setItem(
+    "abCreatorHistory",
+    JSON.stringify(history.slice(0, 10))
+  );
+
+  loadHistory();
+
+  result.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+});
+
+document.getElementById("clearHistory")
+.addEventListener("click", function() {
+
+  if (!confirm("Deseja limpar o histórico deste navegador?")) {
+    return;
+  }
+
+  localStorage.removeItem("abCreatorHistory");
+  loadHistory();
+
+});
+
+loadHistory();
+</script>
+
+</body>
+</html>
